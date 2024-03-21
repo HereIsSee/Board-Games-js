@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Game Landing Page</title>
+    <link id="theme-style" rel="stylesheet" href="../styles/dark.css">
+</head>
+<body>
+    <div class="landing-page">
+        <button class="landing-button" id="go-back-button">Go Back</button>
+        <button class="landing-button" id="settings-button">Settings</button>
+    </div>
+
+    <div class="overlay" id="settings-overlay">
+        <div class="popup">
+            <span class="close-button" id="close-settings">&times;</span>
+            <h2>Settings</h2>
+            <div class="column">
+                <h3>Website Style:</h3>
+                <label for="style-select">Select a style:</label>
+                <select id="style-select" onchange="changeTheme(this.value)">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <!-- Add more style options as needed -->
+                </select>
+            </div>
+            <div class="column">
+                <h3>Music Volume:</h3>
+                <label for="music-slider">Adjust volume:</label>
+                <input type="range" id="music-slider" min="0" max="100" value="50">
+            </div>
+        </div>
+    </div>
+
+    <script src="../Scripts/go-back.js" defer></script>
+    <script src="../Scripts/setting-popup.js" defer></script>
+    <script src="../Scripts/sessionStorage.js"defer></script>
+</body>
+</html>
