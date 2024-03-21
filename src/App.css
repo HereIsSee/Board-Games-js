@@ -11,4 +11,5 @@ html,body{
   place-content: center;
   height: 100vh;
   background: var(--bg-color);
+  font-family: 'Sofia Sans', sans-serif;
 }

@@ -1,7 +1,7 @@
 import './Pieces.css'
 import Piece from './Piece'
 import {useState,useRef} from 'react'
-import {createPosition, copyPosition} from '../../../helper'
+import {createPosition, copyPosition} from '../../helper'
 
 const Pieces = () => {
 
@@ -11,7 +11,7 @@ const Pieces = () => {
     const [state,setState] = useState(createPosition())
     
     const calculateCoords = e => {
-        const {width,left,top} = console.log(ref.current.getBoundingClientRect())
+        const {top,left,width} = ref.current.getBoundingClientRect()
         const size = width / 8
         const y = Math.floor((e.clientX - left) / size)
         const x = 7 - Math.floor((e.clientY - top) / size)
@@ -20,23 +20,26 @@ const Pieces = () => {
     }
 
     const onDrop = e => {
+        e.preventDefault()
         const newPosition = copyPosition (state)
         const {x,y} = calculateCoords(e)
 
         const [p,rank,file] = e.dataTransfer.getData('text').split(',');
         
-        newPosition[rank][file] = ''
+        newPosition[Number(rank)][Number(file)] = ''
         newPosition[x][y] = p
 
         setState(newPosition)
     }
     
+    const onDragOver = e => {e.preventDefault()}
 
 
     return <div
-    ref = {ref}
-    onDrop = {onDrop}
         className='pieces'
+        ref = {ref}
+        onDrop = {onDrop}
+        onDragOver={onDragOver}
         >
         {state.map((r,rank) => 
             r.map((f,file) =>
