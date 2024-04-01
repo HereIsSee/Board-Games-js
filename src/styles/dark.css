@@ -1,0 +1,64 @@
+
+/* Style for game options */
+.game-option {
+  display: block;
+  width: 200px;
+  height: 50px; /* Increase button height */
+  margin: 10px auto;
+  padding: 10px;
+  border: none; /* Remove border */
+  border-radius: 5px;
+  background-color: #3f2929; /* White background */
+  color: #ffffff; /* White text color */
+  font-size: 24px; /* Increase font size */
+  font-weight: bold; /* Bold text */
+  cursor: pointer;
+}
+
+.game-option:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+}
+/*Testing new shit*/
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .close{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-size: 50px;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Add transition effect */
+  }
+  
+  .close:hover {
+    color: red; /* Change color on hover */
+  }
+  
+  
+  .game-option {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    background-color: 	#D3D3D3;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

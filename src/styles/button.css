@@ -1,0 +1,12 @@
+button {
+    border-radius: 100px;
+    border: 2px solid white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 16px 32px; /* Adjust padding as needed */
+    background: #ffa500;
+    border: none; /* Remove border */
+    color: white;
+    margin: 10px; /* Add margin around buttons */
+}
