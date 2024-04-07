@@ -1,7 +1,7 @@
 import './Pieces.css'
 import Piece from './Piece'
 import {useState,useRef} from 'react'
-import {createPosition, copyPosition} from '../../helper'
+import {createPositionChess, copyPosition} from '../../helper'
 import { useAppContext } from '../../contexts/Context'
 import { clearCandidates, makeNewMove } from '../../reducer/actions/move'
 

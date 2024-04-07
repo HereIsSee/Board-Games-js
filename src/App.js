@@ -1,14 +1,15 @@
+// App.js
 import React, { useState, useReducer } from 'react';
 import './App.css';
 import './styles/button.css';
 import './styles/dark.css';
 import AppContext from './contexts/Context';
 import { reducer } from './reducer/reducer';
-import { initGameState } from './constant';
+import { initializeGame } from './constant'; // Updated import
 import Board from './components/Board/Board';
 
 function App() {
-  const [appState, dispatch] = useReducer(reducer, initGameState);
+  const [appState, dispatch] = useReducer(reducer, initializeGame('Chess')); // Default to Chess
   const [isPlaying, setIsPlaying] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
@@ -21,6 +22,8 @@ function App() {
     setSelectedGame(game);
     setShowModal(false);
     setIsPlaying(true);
+    const newGameState = initializeGame(game); // Pass selected game to initializeGame
+    dispatch({ type: 'INITIALIZE_GAME', payload: newGameState }); // Dispatch action to update game state
   };
 
   const handleCloseModal = () => {

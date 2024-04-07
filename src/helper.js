@@ -1,6 +1,6 @@
 export const getCharacter = file => String.fromCharCode(file + 96)
 
-export const createPosition = () =>{
+export const createPositionChess = () =>{
 
     const position = new Array(8).fill('').map(x=> new Array(8).fill(''))
     for(let i=0; i< 8; i++)
@@ -28,6 +28,98 @@ export const createPosition = () =>{
     position[7][7] = 'br'
 
     return position
+}
+
+export const createPositionCheckers = () =>{
+
+    const position = new Array(8).fill('').map(x=> new Array(8).fill(''))
+    for(let i=0; i< 8; i+=2)
+    {
+        position[0][i]='wc';
+    }
+    for(let i=1; i< 8; i+=2)
+    {
+        position[1][i]='wc';
+    }
+    for(let i=0; i< 8; i+=2)
+    {
+        position[2][i]='wc';
+    }
+
+
+    for(let i=1; i< 8; i+=2)
+    {
+        position[5][i]='bc';
+    }
+    for(let i=0; i< 8; i+=2)
+    {
+        position[6][i]='bc';
+    }
+    for(let i=1; i< 8; i+=2)
+    {
+        position[7][i]='bc';
+    }
+
+    return position
+}
+
+export const createPositionChessRandom = () =>{
+
+    const position = new Array(8).fill('').map(x=> new Array(8).fill(''))
+    for(let i=0; i< 4; i++)
+    {
+        let randomNumber1 = Math.ceil(Math.random() * 5);
+        let randomNumber2 = Math.ceil(Math.random() * 5);
+
+        position[1][i]='w'+PieceSelection(randomNumber1);
+        position[0][i]='w'+PieceSelection(randomNumber2);
+
+        position[6][i]='b'+PieceSelection(randomNumber1);
+        position[7][i]='b'+PieceSelection(randomNumber2);
+    }
+    for(let i=5; i< 8; i++)
+    {
+        let randomNumber1 = Math.ceil(Math.random() * 5);
+        let randomNumber2 = Math.ceil(Math.random() * 5);
+
+        position[1][i]='w'+PieceSelection(randomNumber1);
+        position[0][i]='w'+PieceSelection(randomNumber2);
+
+        position[6][i]='b'+PieceSelection(randomNumber1);
+        position[7][i]='b'+PieceSelection(randomNumber2);
+    }
+    let randomNumber = Math.ceil(Math.random() * 5);
+    position[1][4] = 'w'+PieceSelection(randomNumber);
+    
+    position[6][4] = 'b'+PieceSelection(randomNumber);
+
+    position[0][4] = 'wk'
+    
+    position[7][4] = 'bk'
+    
+
+    return position
+}
+function PieceSelection (number){
+    switch(number){
+        case 1:
+            return 'p';
+            break;
+        case 2:
+            return 'b';
+            break;
+        case 3:
+            return 'n';
+            break;
+        case 4:
+            return 'r';
+            break;
+        case 5:
+            return 'q';
+            break;
+        default:
+            return 'p';
+    }
 }
 
 export const copyPosition = position => {

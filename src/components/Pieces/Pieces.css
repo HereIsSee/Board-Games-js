@@ -26,6 +26,9 @@
 .piece.wn {background-image: url('../../assets/wn.png');}
 .piece.wp {background-image: url('../../assets/wp.png');}
 
+.piece.wc {background-image: url(../../assets/wc.png);}
+.piece.bc {background-image: url(../../assets/bc.png);}
+
 .piece.p-07 {transform: translate(0%,0%);}
 .piece.p-17 {transform: translate(100%,0%);}
 .piece.p-27 {transform: translate(200%,0%);}
