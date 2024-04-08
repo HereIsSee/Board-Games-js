@@ -1,4 +1,4 @@
-const { getBishopMoves, getQueenMoves, getRookMoves } = require('./getMoves'); // Import the function you want to test
+const { getBishopMoves, getQueenMoves, getRookMoves, getKnightMoves } = require('./getMoves'); // Import the function you want to test
 
 //----------------------Bishop moves-------------------------------------
 test('Bishop moves correctly diagonally', () => {
@@ -173,4 +173,89 @@ test('Qeen moves from starting pposition', () => {
     ];
     const result = getQueenMoves({ position, piece: 'wq', rank: 0, file: 3 });
     expect(result).toEqual([]);
+});
+
+//----------------------Rook moves-------------------------------------
+test('Rook moves on empty board', () => {
+    const position = [
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','wr','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getRookMoves({ position, piece: 'wr', rank: 3, file: 3 });
+    expect(result).toEqual([[2, 3], [1, 3], [0, 3], 
+        [4, 3], [5, 3], [6, 3], [7, 3],
+        [3, 2], [3, 1], [3, 0], [3, 4], [3, 5], [3, 6], [3, 7]
+    ]);
+});
+
+test('Rook moves blocked by friendly pieces', () => {
+    const position = [
+        ['wr','','','','','','',''],
+        ['wp','wp','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getRookMoves({ position, piece: 'wq', rank: 0, file: 0 });
+    expect(result).toEqual([[ 0, 1 ], [ 0, 2 ],
+        [ 0, 3 ], [ 0, 4 ],
+        [ 0, 5 ], [ 0, 6 ],
+        [ 0, 7 ]]);
+});
+
+test('Rook moves takes enemy piece', () => {
+    const position = [
+        ['wr','bq','','','','','',''],
+        ['wp','wp','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getRookMoves({ position, piece: 'wq', rank: 0, file: 0 });
+    expect(result).toEqual([[ 0, 1 ]]);
+});
+
+//----------------------Knight moves-------------------------------------
+test('Knight moves from starting position', () => {
+    const position = [
+        ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"],
+        ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
+        ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"]
+    ];
+    const result = getKnightMoves({ position, piece: 'wn', rank: 7, file: 1});
+    expect(result).toEqual([[5, 0], [5, 2]
+    ]);
+});
+
+test('Knight moves when there is only one possible move', () => {
+    const position = [
+        ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"],
+        ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ["bp",'','','','','','',''],
+        ['', "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
+        ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"]
+    ];
+    const result = getKnightMoves({ position, piece: 'wn', rank: 7, file: 1});
+    expect(result).toEqual([[5,2]
+    ]);
 });
