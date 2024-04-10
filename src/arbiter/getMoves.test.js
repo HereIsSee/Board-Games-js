@@ -259,3 +259,129 @@ test('Knight moves when there is only one possible move', () => {
     expect(result).toEqual([[5,2]
     ]);
 });
+//----------------------King moves-------------------------------------
+test('King moves on empty board', () => {
+    const position = [
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','wk','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getKingMoves({ position, piece: 'wk', rank: 3, file: 3 });
+    expect(result).toEqual([[ 2, 2 ], [ 2, 3 ], [ 2, 4 ],
+        [ 3, 2 ], [ 3, 4 ],
+        [ 4, 2 ], [ 4, 3 ], [ 4, 4 ]
+        ]);
+});
+
+test('King moves on from corner', () => {
+    const position = [
+        ['wk','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getKingMoves({ position, piece: 'wk', rank: 0, file: 0 });
+    expect(result).toEqual([[ 0, 1 ], [ 1, 0 ], [ 1, 1 ],
+        ]);
+});
+
+test('King moves blocked by friendly pieces', () => {
+    const position = [
+        ['wk','','','','','','',''],
+        ['wp','wp','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getKingMoves({ position, piece: 'wk', rank: 0, file: 0 });
+    expect(result).toEqual([[ 0, 1 ]]);
+});
+test('King moves takes enemy piece', () => {
+    const position = [
+        ['wk','bq','','','','','',''],
+        ['wp','wp','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getKingMoves({ position, piece: 'wk', rank: 0, file: 0 });
+    expect(result).toEqual([[ 0, 1 ]]);
+});
+
+test('King moves from starting pposition', () => {
+    const position = [
+        ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"],
+        ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
+        ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"]
+    ];
+    const result = getKingMoves({ position, piece: 'wk', rank: 0, file: 4 });
+    expect(result).toEqual([]);
+});
+//----------------------Pawn moves-------------------------------------
+test('Pawn moves on empty board after first move', () => {
+    const position = [
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','wp','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getPawnMoves({ position, piece: 'wp', rank: 3, file: 3 });
+    expect(result).toEqual([[ 4, 3 ]]);
+});
+
+
+
+
+test('Pawn takes enemy piece', () => {
+    const position = [
+        ['','','','','','','',''],
+        ['','wp','','','','','',''],
+        ['','','bp','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','','']
+    ];
+    const result = getPawnMoves({ position, piece: 'wp', rank: 1, file: 1 });
+    expect(result).toEqual([[ 2, 2 ]]);
+});
+
+test('Pawn moves from starting pposition', () => {
+    const position = [
+        ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"],
+        ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ['','','','','','','',''],
+        ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
+        ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"]
+    ];
+    const result = getPawnMoves({ position, piece: 'wp', rank: 1, file: 0 });
+    expect(result).toEqual([[ 3, 0 ], [ 2, 0 ]]);
+});
