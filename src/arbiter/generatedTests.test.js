@@ -20,7 +20,8 @@ describe('Chess Piece Moves', () => {
         });
 
         test('should return empty array from corner with surrounding own pieces', () => {
-            position[0][1] = 'wr'; 
+            position[0][1] = 'wn'; 
+            position[1][0] = 'wp';
             expect(getRookMoves({position, piece: 'wr', rank: 0, file: 0})).toEqual([]);
         });
     });

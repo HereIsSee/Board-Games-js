@@ -1,4 +1,4 @@
-const { getBishopMoves, getQueenMoves, getRookMoves, getKnightMoves } = require('./getMoves'); // Import the function you want to test
+const { getBishopMoves, getQueenMoves, getRookMoves, getKnightMoves, getKingMoves, getPawnMoves, getPawnCaptures } = require('./getMoves'); // Import the function you want to test
 
 //----------------------Bishop moves-------------------------------------
 test('Bishop moves correctly diagonally', () => {
@@ -272,9 +272,9 @@ test('King moves on empty board', () => {
         ['','','','','','','','']
     ];
     const result = getKingMoves({ position, piece: 'wk', rank: 3, file: 3 });
-    expect(result).toEqual([[ 2, 2 ], [ 2, 3 ], [ 2, 4 ],
+    expect(result).toEqual([[ 4, 2 ], [ 4, 3 ], [ 4, 4 ],
         [ 3, 2 ], [ 3, 4 ],
-        [ 4, 2 ], [ 4, 3 ], [ 4, 4 ]
+        [ 2, 2 ], [ 2, 3 ], [ 2, 4 ]
         ]);
 });
 
@@ -290,7 +290,7 @@ test('King moves on from corner', () => {
         ['','','','','','','','']
     ];
     const result = getKingMoves({ position, piece: 'wk', rank: 0, file: 0 });
-    expect(result).toEqual([[ 0, 1 ], [ 1, 0 ], [ 1, 1 ],
+    expect(result).toEqual([[ 1, 0 ], [ 1, 1 ], [ 0, 1 ],
         ]);
 });
 
@@ -367,7 +367,7 @@ test('Pawn takes enemy piece', () => {
         ['','','','','','','',''],
         ['','','','','','','','']
     ];
-    const result = getPawnMoves({ position, piece: 'wp', rank: 1, file: 1 });
+    const result = getPawnCaptures({ position, piece: 'wp', rank: 1, file: 1 });
     expect(result).toEqual([[ 2, 2 ]]);
 });
 
@@ -383,5 +383,5 @@ test('Pawn moves from starting pposition', () => {
         ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"]
     ];
     const result = getPawnMoves({ position, piece: 'wp', rank: 1, file: 0 });
-    expect(result).toEqual([[ 3, 0 ], [ 2, 0 ]]);
+    expect(result).toEqual([[ 2, 0 ], [ 3, 0 ]]);
 });
