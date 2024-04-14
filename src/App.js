@@ -5,7 +5,7 @@ import './styles/button.css';
 import './styles/dark.css';
 import AppContext from './contexts/Context';
 import { reducer } from './reducer/reducer';
-import { initializeGame } from './constant'; // Updated import
+import { initializeGame } from './constants'; // Updated import
 import Board from './components/Board/Board';
 
 function App() {

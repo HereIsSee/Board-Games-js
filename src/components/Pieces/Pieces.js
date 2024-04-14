@@ -3,7 +3,9 @@ import Piece from './Piece'
 import {useState,useRef} from 'react'
 import {createPositionChess, copyPosition} from '../../helper'
 import { useAppContext } from '../../contexts/Context'
+import arbiter from '../../arbiter/arbiter'
 import { clearCandidates, makeNewMove } from '../../reducer/actions/move'
+import { openPromotion } from '../../reducer/actions/popup'
 
 const Pieces = () => {
 
@@ -23,24 +25,39 @@ const Pieces = () => {
 
         return{x,y}
     }
+    const openPromotionBox = ({rank,file,x,y}) =>
+        dispatch(openPromotion({
+
+            rank : Number(rank),file : Number(file),x,y
+        }))
+    
+    const move = e =>{
+        const {x,y} = calculateCoords(e)
+
+        const [piece,rank,file] = e.dataTransfer.getData('text').split(',');
+        if (appState.candidateMoves?.find(m => m[0] === x && m[1] === y)) {
+            if((piece === 'wp' && x === 7) || (piece === 'bp' && x === 0)){
+                openPromotionBox({rank,file,x,y})
+                return   
+            }
+
+            const newPosition = arbiter.performMove({
+                position : currentPosition,
+                piece,rank,file,
+                x,y
+            }) 
+            dispatch(makeNewMove({newPosition}))
+        }
+        dispatch(clearCandidates())
+    }
 
     const onDrop = e => {
         e.preventDefault()
-        const newPosition = copyPosition (currentPosition)
-        const {x,y} = calculateCoords(e)
+        move (e)
+        
+        
 
-        const [p,rank,file] = e.dataTransfer.getData('text').split(',');
-
-        if (appState.candidateMoves?.find(m => m[0] === x && m[1] === y)) { 
-            if(p.endsWith('p') && !newPosition[x][y] && x!== rank && y !== file)
-                newPosition[rank][y] = ''
-
-            newPosition[Number(rank)][Number(file)] = ''
-            newPosition[x][y] = p
-            dispatch(makeNewMove({newPosition}))
-        }
-
-        dispatch(clearCandidates())
+        
     }
     
     const onDragOver = e => {e.preventDefault()}

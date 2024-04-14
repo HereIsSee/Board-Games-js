@@ -5,6 +5,7 @@ import Ranks from './bits/Ranks';
 import Files from './bits/Files';
 import Pieces from '../Pieces/Pieces';
 import { useAppContext } from '../../contexts/Context';
+import Popup from '../Popup/Popup';
 
 const Board = ({ onGoBack }) => {
   const ranks = Array(8).fill().map((x, i) => 8 - i);
@@ -39,6 +40,8 @@ const Board = ({ onGoBack }) => {
         </div>
 
         <Pieces />
+
+        <Popup />
 
         <Files files={files} />
       </div>

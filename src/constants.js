@@ -1,6 +1,11 @@
 // constant.js
 import { createPositionChess, createPositionChessRandom, createPositionCheckers } from "./helper";
-
+export const Status = { 
+  'ongoing' : 'Ongoing',
+  'promotion' : 'Promotion',
+  'white' : 'white wins',
+  'black' : 'black wins'
+}
 export const initializeGame = (selectedGame) => {
   let position;
   switch (selectedGame) {
@@ -17,9 +22,13 @@ export const initializeGame = (selectedGame) => {
       position = createPositionChess(); // Default to Chess if no valid game selected
   }
 
+  
+
   return {
     position: [position],
     turn: 'w',
-    candidateMoves: []
+    candidateMoves: [],
+    status : Status.ongoing,
+    promotionSquare : null
   };
 };
