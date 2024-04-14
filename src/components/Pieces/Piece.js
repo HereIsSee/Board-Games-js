@@ -51,7 +51,11 @@ const Piece = ({
             e.target.style.display = 'none'
         },0)
         if (turn === piece[0]){
-            const candidateMoves = arbiter.getRegularMoves({position:currentPosition, piece, rank, file})
+            const candidateMoves = arbiter.getRegularMoves({
+                position:currentPosition, 
+                piece, 
+                rank, 
+                file})
             dispatch(generateCandidateMoves({candidateMoves}))
         }
     }
