@@ -43,3 +43,15 @@
     top: 0;
     border: 6px solid var(--highlight);
 }
+
+.checked:after {
+    display: block;
+    position: absolute;
+    content: '';
+    width :  var(--tile-size);
+    height :  var(--tile-size);
+    background: var(--checked);
+    border-radius: 20px;
+    left: 0;
+    top: 0;
+}
