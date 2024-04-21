@@ -1,10 +1,12 @@
 // constant.js
 import { createPositionChess, createPositionChessRandom, createPositionCheckers } from "./helper";
 export const Status = { 
-  'ongoing' : 'Ongoing',
-  'promotion' : 'Promotion',
-  'white' : 'white wins',
-  'black' : 'black wins'
+    'ongoing' : 'Ongoing',
+    'promoting' : 'Promoting',
+    'white' : 'White wins',
+    'black' : 'Black wins',
+    'stalemate' : 'Game draws due to stalemate',
+    'insufficient' : 'Game draws due to insufficient material',
 }
 export const initializeGame = (selectedGame) => {
   let position;
@@ -29,6 +31,10 @@ export const initializeGame = (selectedGame) => {
     turn: 'w',
     candidateMoves: [],
     status : Status.ongoing,
-    promotionSquare : null
+    promotionSquare : null,
+    castleDirection: {
+      w: 'both',
+      b: 'both',
+    }
   };
 };

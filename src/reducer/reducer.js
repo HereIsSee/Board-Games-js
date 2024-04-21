@@ -1,4 +1,4 @@
-import actionTypes from "./actions/actionTypes";
+import actionTypes from "./actionTypes";
 import { Status } from "../constants"
 
 export const reducer = (state, action) => {
@@ -42,12 +42,22 @@ export const reducer = (state, action) => {
         promotionSquare : null
       };
     }
+    case actionTypes.CAN_CASTLE : {
+      let {turn,castleDirection} = state 
+      castleDirection[turn] = action.payload
 
+      return {
+          ...state,
+          castleDirection,
+      }
+    }
     case actionTypes.INITIALIZE_GAME: { // Handle initialization of game state
       return {
         ...action.payload, // Update state with payload containing new game state
       };
     }
+
+    
 
     default:
       return state;

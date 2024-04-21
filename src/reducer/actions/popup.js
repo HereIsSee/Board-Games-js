@@ -1,4 +1,4 @@
-import actionTypes from "./actionTypes.js"
+import actionTypes from "../actionTypes.js"
 export const openPromotion = ({rank,file,x,y}) => {
     return {
         type : actionTypes.PROMOTION_OPEN,
