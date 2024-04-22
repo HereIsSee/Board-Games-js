@@ -37,6 +37,7 @@ const PromotionBox = ( {onClosePopup, dispatch}) => {
         onClosePopup()
         const newPosition = copyPosition(appState.position[appState.position.length -1])
         newPosition[promotionSquare.x][promotionSquare.y] = color + option
+        newPosition[promotionSquare.rank][promotionSquare.file] = ''
         dispatch(clearCandidates())
         dispatch(makeNewMove({newPosition}))
     }
