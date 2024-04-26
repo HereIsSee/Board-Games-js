@@ -1,6 +1,7 @@
 import React from 'react';
 import './Board.css';
-import '../../styles/button.css'
+import '../../styles/button.css';
+import '../../styles/dark.css';
 import Ranks from './bits/Ranks';
 import Files from './bits/Files';
 import Pieces from '../Pieces/Pieces';
@@ -10,7 +11,7 @@ import Popup from '../Popup/Popup';
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
-const Board = ({ onGoBack }) => {
+const Board = ({ onGoBack, onSettingsClick }) => {
   const ranks = Array(8).fill().map((x, i) => 8 - i);
   const files = Array(8).fill().map((x, i) => i + 1);
   const { appState } = useAppContext();
@@ -48,7 +49,12 @@ const Board = ({ onGoBack }) => {
 
   return (
     <div>
+      <div class="container">
       <button id="play-button" onClick={onGoBack}>Go Back</button>
+      <button id="settings-button" onClick={onSettingsClick}>Settings</button>
+      </div>
+      
+      
       <div className="board">
         <Ranks ranks={ranks} />
 
