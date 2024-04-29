@@ -1,17 +1,17 @@
-import './Board.css'
-import { useAppContext }from '../../contexts/Context'
-
-import Ranks from './bits/Ranks'
-import Files from './bits/Files'
-import Pieces from '../Pieces/Pieces'
-import PromotionBox from '../Popup/PromotionBox/PromotionBox'
-import Popup from '../Popup/Popup'
-import GameEnds from '../Popup/GameEnds/GameEnds'
+import React from 'react';
+import './Board.css';
+import '../../styles/button.css';
+import '../../styles/dark.css';
+import Ranks from './bits/Ranks';
+import Files from './bits/Files';
+import Pieces from '../Pieces/Pieces';
+import { useAppContext } from '../../contexts/Context';
+import Popup from '../Popup/Popup';
 
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
-const Board = ({ onGoBack }) => {
+const Board = ({ onGoBack, onSettingsClick }) => {
   const ranks = Array(8).fill().map((x, i) => 8 - i);
   const files = Array(8).fill().map((x, i) => i + 1);
   const { appState } = useAppContext();
@@ -49,28 +49,26 @@ const Board = ({ onGoBack }) => {
 
   return (
     <div>
+      <div class="container">
       <button id="play-button" onClick={onGoBack}>Go Back</button>
+      <button id="settings-button" onClick={onSettingsClick}>Settings</button>
+      </div>
+      
+      
       <div className="board">
         <Ranks ranks={ranks} />
 
-        <div className='tiles'>
-            {ranks.map((rank,i) => 
-                files.map((file,j) => 
-                    <div 
-                        key={file+''+rank} 
-                        i={i}
-                        j={j}
-                        className={`${getClassName(7-i,j)}`}>
-                    </div>
-                ))}
+        <div className="tiles">
+          {ranks.map((rank, i) =>
+            files.map((file, j) => (
+              <div key={file + '' + rank} className={getClassName(7 - i, j)}></div>
+            ))
+          )}
         </div>
 
         <Pieces />
-            
-        <Popup >
-            <PromotionBox />
-            <GameEnds />
-        </Popup >
+
+        <Popup />
 
         <Files files={files} />
       </div>

@@ -5,7 +5,7 @@ import { useAppContext }from '../../contexts/Context'
 import { openPromotion } from '../../reducer/actions/popup'
 import { getCastlingDirections } from '../../arbiter/getMoves'
 import { updateCastling, detectStalemate, detectInsufficientMaterial, detectCheckmate, } from '../../reducer/actions/game'
-
+import {getnewMoveNotation} from '../../helper'
 import { makeNewMove, clearCandidates } from '../../reducer/actions/move'
 import arbiter from '../../arbiter/arbiter'
 
@@ -66,14 +66,17 @@ const Pieces = () => {
                 piece,rank,file,
                 x,y
             })
-            dispatch(makeNewMove({newPosition}))
+            const newMove = getnewMoveNotation({
+                piece,rank,file,x,y,position : currentPosition
+            })
+            dispatch(makeNewMove({newPosition, newMove}))
 
             if (arbiter.insufficientMaterial(newPosition))
                 dispatch(detectInsufficientMaterial())
             else if (arbiter.isStalemate(newPosition,opponent,castleDirection)){
                 dispatch(detectStalemate())
             }
-            else if (arbiter.isCheckmate(newPosition,opponent,castleDirection)){
+            else if (arbiter.IsCheckMate(newPosition,opponent,castleDirection)){
                 dispatch(detectCheckmate(piece[0]))
             }
         }

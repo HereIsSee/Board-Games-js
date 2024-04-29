@@ -1,15 +1,52 @@
 @import './constants.css';
 
-
-html,body{
-  margin:0;
-  padding:0;
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
-.App{
+.App {
   display: grid;
   place-content: center;
   height: 100vh;
   background: var(--bg-color);
   font-family: 'Sofia Sans', sans-serif;
+}
+
+.content-container {
+  display: flex;
+  max-width: 1200px; /* Set a maximum width for the content */
+}
+
+.control-panel {
+  /* Adjust the flex property to take up less space */
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+}
+
+.main-content {
+  /* Adjust the flex property to take up less space */
+  flex: 2;
+  /* Align content to the center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.moves-control {
+  /* Align items vertically */
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  justify-content: space-between; /* Space items evenly vertically */
+  height: 100%; /* Fill up the entire height of the Control */
+}
+/* Additional styles for the right side */
+.right-side {
+  /* Add padding or margin to create space between the components and the board */
+  padding-left: 20px; /* Adjust as needed */
+  display: flex; /* Make the components align horizontally */
+  flex-direction: column; /* Align the components vertically */
+}
+.bottom {
+  margin-top: auto; /* Push the element to the bottom */
 }

@@ -4,18 +4,24 @@ import './styles/button.css';
 import './styles/dark.css';
 import AppContext from './contexts/Context';
 import { reducer } from './reducer/reducer';
-import { initializeGame } from './constants'; // Updated import
+import { initializeGame } from './constants';
 import Board from './components/Board/Board';
+import TakeBack from './components/Control/bits/TakeBack';
+import MovesList from './components/Control/bits/MovesList';
+import Control from './components/Control/Control';
 
 function App() {
-  const [appState, dispatch] = useReducer(reducer, initializeGame('Chess')); // Default to Chess
+  const [appState, dispatch] = useReducer(reducer, initializeGame('Chess'));
   const [isPlaying, setIsPlaying] = useState(false);
   const [showPlayModal, setShowPlayModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
+  const [takeBackVisible, setTakeBackVisible] = useState(false); 
+  const [movesListVisible, setMovesListVisible] = useState(false); 
 
   const handlePlayClick = () => {
     setShowPlayModal(true);
+     // Show TakeBack button when play button is clicked
   };
 
   const handleSettingsClick = () => {
@@ -26,8 +32,10 @@ function App() {
     setSelectedGame(game);
     setShowPlayModal(false);
     setIsPlaying(true);
-    const newGameState = initializeGame(game); // Pass selected game to initializeGame
-    dispatch({ type: 'INITIALIZE_GAME', payload: newGameState }); // Dispatch action to update game state
+    const newGameState = initializeGame(game);
+    dispatch({ type: 'INITIALIZE_GAME', payload: newGameState });
+    setTakeBackVisible(true);
+    setMovesListVisible(true);
   };
 
   const handleClosePlayModal = () => {
@@ -41,39 +49,54 @@ function App() {
   const handleGoBack = () => {
     setIsPlaying(false);
     setSelectedGame(null);
+    setTakeBackVisible(false); // Hide TakeBack button when going back
+    setMovesListVisible(false);
   };
 
   return (
     <AppContext.Provider value={{ appState, dispatch }}>
       <div className="App">
-        {isPlaying ? (
-          <Board onGoBack={handleGoBack} onSettingsClick={handleSettingsClick} />
-        ) : (
-          <>
-            <button className="landing-button" id="play-button" onClick={handlePlayClick}>Play</button>
-            <button className="landing-button" id="settings-button" onClick={handleSettingsClick}>Settings</button>
-          </>
-        )}
-        {showPlayModal && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={handleClosePlayModal}>&times;</span>
-              <h2>Choose a Game</h2>
-              <button className="game-option" onClick={() => handleGameSelect('Chess')}>Chess</button>
-              <button className="game-option" onClick={() => handleGameSelect('Checkers')}>Checkers</button>
-              <button className="game-option" onClick={() => handleGameSelect('Random')}>Random</button>
-            </div>
+      <div className="content-container">
+        
+          <div className="main-content">
+            {isPlaying ? (
+              <Board onGoBack={handleGoBack} onSettingsClick={handleSettingsClick} />
+            ) : (
+              <>
+                <button className="landing-button" id="play-button" onClick={handlePlayClick}>Play</button>
+                <button className="landing-button" id="settings-button" onClick={handleSettingsClick}>Settings</button>
+              </>
+            )}
+            {showPlayModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={handleClosePlayModal}>&times;</span>
+                  <h2>Choose a Game</h2>
+                  <button className="game-option" onClick={() => handleGameSelect('Chess')}>Chess</button>
+                  <button className="game-option" onClick={() => handleGameSelect('Checkers')}>Checkers</button>
+                  <button className="game-option" onClick={() => handleGameSelect('Random')}>Random</button>
+                </div>
+              </div>
+            )}
+            {showSettingsModal && (
+              <div className="modal">
+                <div className="modal-content">
+                  <span className="close" onClick={handleCloseSettingsModal}>&times;</span>
+                  <h2>Settings</h2>
+                  {/* Add settings options here */}
+                </div>
+              </div>
+            )}
           </div>
-        )}
-        {showSettingsModal && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={handleCloseSettingsModal}>&times;</span>
-              <h2>Settings</h2>
-              {/* Add settings options here */}
+          <div className="right-side">
+          <Control>
+            <div className="moves-control">
+              {movesListVisible && <MovesList />}
+              {takeBackVisible && <TakeBack />}
             </div>
-          </div>
-        )}
+          </Control>
+        </div>
+        </div>
       </div>
     </AppContext.Provider>
   );
