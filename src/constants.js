@@ -1,5 +1,7 @@
 // constant.js
 import { createPositionChess, createPositionChessRandom, createPositionCheckers } from "./helper";
+import { createPosition } from './helper'
+
 export const Status = { 
     'ongoing' : 'Ongoing',
     'promoting' : 'Promoting',
@@ -38,3 +40,15 @@ export const initializeGame = (selectedGame) => {
     }
   };
 };
+
+export const initGameState = {
+  position : [createPositionChess()],
+  turn : 'w',
+  candidateMoves : [],
+  promotionSquare : null,
+  status : Status.ongoing,
+  castleDirection : {
+      w : 'both',
+      b : 'both'
+  }, 
+}

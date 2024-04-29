@@ -26,3 +26,10 @@ export const initializeGame = (gameState) => { // Add this function for initiali
         payload: gameState,
     };
 };
+
+export const generateCandidates = ({candidateMoves}) => {
+    return {
+        type: actionTypes.GENERATE_CANDIDATE_MOVES,
+        payload : {candidateMoves}
+    }
+}
