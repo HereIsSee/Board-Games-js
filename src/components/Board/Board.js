@@ -1,15 +1,17 @@
-import './Board.css'
-import { useAppContext }from '../../contexts/Context'
-
-import Ranks from './bits/Ranks'
-import Files from './bits/Files'
-import Pieces from '../Pieces/Pieces'
-import PromotionBox from '../Popup/PromotionBox/PromotionBox'
-import Popup from '../Popup/Popup'
-import GameEnds from '../Popup/GameEnds/GameEnds'
+import React from 'react';
+import './Board.css';
+import '../../styles/button.css';
+import '../../styles/dark.css';
+import Ranks from './bits/Ranks';
+import Files from './bits/Files';
+import Pieces from '../Pieces/Pieces';
+import { useAppContext } from '../../contexts/Context';
+import Popup from '../Popup/Popup';
 
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
+import PromotionBox from '../Popup/PromotionBox/PromotionBox'
+import GameEnds from '../Popup/GameEnds/GameEnds'
 
 
 const Board = ({ onGoBack, onSettingsClick  }) => {
@@ -57,24 +59,19 @@ const Board = ({ onGoBack, onSettingsClick  }) => {
       <div className="board">
         <Ranks ranks={ranks} />
 
-        <div className='tiles'>
-            {ranks.map((rank,i) => 
-                files.map((file,j) => 
-                    <div 
-                        key={file+''+rank} 
-                        i={i}
-                        j={j}
-                        className={`${getClassName(7-i,j)}`}>
-                    </div>
-                ))}
+        <div className="tiles">
+          {ranks.map((rank, i) =>
+            files.map((file, j) => (
+              <div key={file + '' + rank} className={getClassName(7 - i, j)}></div>
+            ))
+          )}
         </div>
 
         <Pieces />
-            
-        <Popup >
-            <PromotionBox />
+        <Popup />
+        <PromotionBox />
             <GameEnds />
-        </Popup >
+        <Popup />
 
         <Files files={files} />
       </div>

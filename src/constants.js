@@ -31,6 +31,7 @@ export const initializeGame = (selectedGame) => {
   return {
     position: [position],
     turn: 'w',
+    movesList : [],
     candidateMoves: [],
     status : Status.ongoing,
     promotionSquare : null,

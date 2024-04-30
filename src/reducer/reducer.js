@@ -4,16 +4,21 @@ import { Status } from "../constants"
 export const reducer = (state, action) => {
   switch (action.type) {
       case actionTypes.NEW_MOVE : {
-          let {position,turn} = state 
+          let {position,movesList,turn} = state 
           position = [
               ...position,
               action.payload.newPosition
+          ]
+          movesList = [
+            ...movesList,
+            action.payload.newMove
           ]
           
           turn = turn === 'w' ? 'b' : 'w'
 
           return {
               ...state,
+              movesList,
               position,
               turn,
           }
@@ -32,6 +37,22 @@ export const reducer = (state, action) => {
         ...state,
         candidateMoves: [],
       };
+    }
+
+    case actionTypes.TAKE_BACK: {
+      let{position,movesList,turn} = state
+
+      if(position.length > 1){
+        position = position.slice(0,position.length-1)
+        movesList = movesList.slice(0,position.length-1)
+        turn = turn === 'w' ? 'b' : 'w'
+      }
+      return {
+        ...state,
+        position,
+        movesList,
+        turn
+      }
     }
 
     case actionTypes.PROMOTION_OPEN: {

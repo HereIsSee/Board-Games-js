@@ -1,9 +1,9 @@
 import actionTypes from "../actionTypes";
 
-export const makeNewMove = ({ newPosition }) => {
+export const makeNewMove = ({ newPosition, newMove }) => {
     return {
         type: actionTypes.NEW_MOVE,
-        payload: { newPosition },
+        payload: { newPosition, newMove },
     };
 };
 
@@ -32,4 +32,10 @@ export const generateCandidates = ({candidateMoves}) => {
         type: actionTypes.GENERATE_CANDIDATE_MOVES,
         payload : {candidateMoves}
     }
-}
+};
+
+export const takeBack = () => {
+    return {
+        type: actionTypes.TAKE_BACK,
+    };
+};

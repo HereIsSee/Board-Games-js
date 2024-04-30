@@ -97,7 +97,6 @@ const arbiter = {
 
         return (!isInCheck && moves.length === 0)
     },
-
     insufficientMaterial : function(position){
         const pieces = position.reduce((acc,rank) =>
         acc = [
@@ -122,25 +121,24 @@ const arbiter = {
 
         return false
     },
-
-    isCheckmate : function(position,player,castleDirection) {
-        const isInCheck = this.isPlayerInCheck({positionAfterMove: position, player})
+    IsCheckMate : function (position,player, castleDirection){
+        const isInCheck = this.isPlayerInCheck({positionAfterMove : position , player })
         if (!isInCheck)
             return false
 
-        const pieces = getPieces(position,player)
+        const pieces = getPieces(position, player)
         const moves = pieces.reduce((acc,p) => acc = [
             ...acc,
             ...(this.getValidMoves({
-                    position, 
-                    castleDirection, 
-                    ...p
-                })
-            )
+                position,
+                castleDirection,
+                ...p
+            }))
         ], [])
 
         return (isInCheck && moves.length === 0)
+    }
 }
-}
+
 
 export default arbiter

@@ -1,3 +1,4 @@
+
 export const getCharacter = file => String.fromCharCode(file + 96)
 
 export const createPositionChess = () =>{
@@ -13,37 +14,19 @@ export const createPositionChess = () =>{
     position[0][1] = 'wn'
     position[0][2] = 'wb'
     position[0][3] = 'wq'
-    position[0][4] = 'wk' 
+    position[0][4] = 'wk'
     position[0][5] = 'wb'
     position[0][6] = 'wn'
-    position[0][7] = 'wr' 
+    position[0][7] = 'wr'
 
     position[7][0] = 'br'
     position[7][1] = 'bn'
     position[7][2] = 'bb'
     position[7][3] = 'bq'
-    position[7][4] = 'bk' 
+    position[7][4] = 'bk'
     position[7][5] = 'bb'
     position[7][6] = 'bn'
     position[7][7] = 'br'
-
-    // position[0][0] = 'wr'
-    // position[0][1] = 'wn'
-    // position[0][2] = 'wb'
-    // position[1][5] = 'wq'
-    // position[0][4] = 'wk' 
-    // position[0][5] = 'wb'
-    // position[0][6] = 'wn'
-    // position[0][7] = 'wr' 
-
-    // position[7][0] = 'br'
-    // position[7][1] = 'bn'
-    // position[7][2] = 'bb'
-    // position[7][3] = 'bq'
-    // position[7][4] = 'bk' 
-    // position[7][5] = 'bb'
-    // position[7][6] = 'bn'
-    // position[7][7] = 'br'
 
     return position
 }
@@ -166,4 +149,31 @@ export const findPieceCoords = (position,type) => {
     })
     return results
 }
+export const getnewMoveNotation = ({piece,rank,file,x,y,position,promotesTo}) => {
+    let note =''
+    rank = Number(rank)
+    file = Number(file)
 
+    if(piece[1] === 'k' && Math.abs(file - y) === 2){
+        if(file>y)
+            return '0-0'
+        else
+            return '0-0-0'
+    }
+    if(piece[1] !== 'p'){
+        note += piece[1].toUpperCase()
+        if(position[x][y]){
+            note+='x'
+        }
+    }
+    else if (rank !== x && file !== y){
+        note+= getCharacter(file+1)+'x'
+    }
+
+    note+= getCharacter(y+1) + (x+1)
+
+    if(promotesTo)
+        note+= '=' + promotesTo.toUpperCase()
+
+    return note
+}
