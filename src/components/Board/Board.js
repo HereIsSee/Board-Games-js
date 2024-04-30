@@ -12,9 +12,9 @@ import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
 const Board = ({ onGoBack, onSettingsClick  }) => {
-=======
+
 const Board = ({ onGoBack, onSettingsClick }) => {
->>>>>>> fba9341e41f9344940db670c15d34a5f9d6c0a20
+
   const ranks = Array(8).fill().map((x, i) => 8 - i);
   const files = Array(8).fill().map((x, i) => i + 1);
   const { appState } = useAppContext();
@@ -53,17 +53,17 @@ const Board = ({ onGoBack, onSettingsClick }) => {
   return (
     <div>
       <div class="container">
-<<<<<<< HEAD
+
       <button id ="play-button" onClick={onGoBack}>Go Back</button>
       <button id ="settings-button" onClick={onSettingsClick}>Settings</button>
       </div>
-=======
+
       <button id="play-button" onClick={onGoBack}>Go Back</button>
       <button id="settings-button" onClick={onSettingsClick}>Settings</button>
       </div>
       
       
->>>>>>> fba9341e41f9344940db670c15d34a5f9d6c0a20
+
       <div className="board">
         <Ranks ranks={ranks} />
 
@@ -76,11 +76,11 @@ const Board = ({ onGoBack, onSettingsClick }) => {
         </div>
 
         <Pieces />
-<<<<<<< HEAD
+
         <Popup />
         <PromotionBox />
             <GameEnds />
-=======
+
 
         <Popup />
 
