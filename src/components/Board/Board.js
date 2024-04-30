@@ -11,7 +11,8 @@ import GameEnds from '../Popup/GameEnds/GameEnds'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
-const Board = ({ onGoBack }) => {
+
+const Board = ({ onGoBack, onSettingsClick  }) => {
   const ranks = Array(8).fill().map((x, i) => 8 - i);
   const files = Array(8).fill().map((x, i) => i + 1);
   const { appState } = useAppContext();
@@ -49,7 +50,10 @@ const Board = ({ onGoBack }) => {
 
   return (
     <div>
-      <button id="play-button" onClick={onGoBack}>Go Back</button>
+      <div class="container">
+      <button id ="play-button" onClick={onGoBack}>Go Back</button>
+      <button id ="settings-button" onClick={onSettingsClick}>Settings</button>
+      </div>
       <div className="board">
         <Ranks ranks={ranks} />
 
