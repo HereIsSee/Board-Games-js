@@ -7,7 +7,8 @@ import Files from './bits/Files';
 import Pieces from '../Pieces/Pieces';
 import { useAppContext } from '../../contexts/Context';
 import Popup from '../Popup/Popup';
-
+import PromotionBox from '../Popup/PromotionBox/PromotionBox';
+import GameEnds from '../Popup/GameEnds/GameEnds';
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
