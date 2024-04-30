@@ -7,11 +7,12 @@ import Files from './bits/Files';
 import Pieces from '../Pieces/Pieces';
 import { useAppContext } from '../../contexts/Context';
 import Popup from '../Popup/Popup';
-
+import PromotionBox from '../Popup/PromotionBox/PromotionBox'
+import GameEnds from '../Popup/GameEnds/GameEnds'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
-const Board = ({ onGoBack, onSettingsClick  }) => {
+
 
 const Board = ({ onGoBack, onSettingsClick }) => {
 
@@ -57,11 +58,6 @@ const Board = ({ onGoBack, onSettingsClick }) => {
       <button id ="play-button" onClick={onGoBack}>Go Back</button>
       <button id ="settings-button" onClick={onSettingsClick}>Settings</button>
       </div>
-
-      <button id="play-button" onClick={onGoBack}>Go Back</button>
-      <button id="settings-button" onClick={onSettingsClick}>Settings</button>
-      </div>
-      
       
 
       <div className="board">
