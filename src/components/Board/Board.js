@@ -7,8 +7,8 @@ import Files from './bits/Files';
 import Pieces from '../Pieces/Pieces';
 import { useAppContext } from '../../contexts/Context';
 import Popup from '../Popup/Popup';
-import PromotionBox from '../Popup/PromotionBox/PromotionBox'
-import GameEnds from '../Popup/GameEnds/GameEnds'
+import PromotionBox from '../Popup/PromotionBox/PromotionBox';
+import GameEnds from '../Popup/GameEnds/GameEnds';
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
@@ -32,7 +32,7 @@ const Board = ({ onGoBack, onSettingsClick }) => {
         return getKingPosition (position, appState.turn)
 
     return null
-})()
+  })()
 
 
   const getClassName = (i, j) => {
@@ -58,6 +58,9 @@ const Board = ({ onGoBack, onSettingsClick }) => {
       <button id ="play-button" onClick={onGoBack}>Go Back</button>
       <button id ="settings-button" onClick={onSettingsClick}>Settings</button>
       </div>
+
+      
+      
       
 
       <div className="board">
@@ -84,6 +87,6 @@ const Board = ({ onGoBack, onSettingsClick }) => {
       </div>
     </div>
   );
-};
+}
 
-export default Board;
+export default Board
