@@ -1,3 +1,4 @@
+
 export const getCharacter = file => String.fromCharCode(file + 96)
 
 export const createPositionChess = () =>{
@@ -175,4 +176,8 @@ export const getnewMoveNotation = ({piece,rank,file,x,y,position,promotesTo}) =>
         note+= '=' + promotesTo.toUpperCase()
 
     return note
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fba9341e41f9344940db670c15d34a5f9d6c0a20
