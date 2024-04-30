@@ -1,16 +1,26 @@
 @import './constants.css';
 
-html, body {
-  margin: 0;
-  padding: 0;
+
+html,body{
+  margin:0;
+  padding:0;
 }
 
-.App {
+.App{
   display: grid;
   place-content: center;
   height: 100vh;
   background: var(--bg-color);
   font-family: 'Sofia Sans', sans-serif;
+}
+
+button{
+  background: var(--dark-tile);
+  color: var(--light-tile);
+  border: 0 none;
+  padding: 10px 30px;
+  margin: 10px 0;
+  font-size: 1.1em;
 }
 
 .content-container {
