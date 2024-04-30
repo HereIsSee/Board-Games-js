@@ -10,6 +10,8 @@ import Popup from '../Popup/Popup';
 
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
+import PromotionBox from '../Popup/PromotionBox/PromotionBox';
+import GameEnds from '../Popup/GameEnds/GameEnds';
 
 const Board = ({ onGoBack, onSettingsClick }) => {
   const ranks = Array(8).fill().map((x, i) => 8 - i);
@@ -68,7 +70,10 @@ const Board = ({ onGoBack, onSettingsClick }) => {
 
         <Pieces />
 
-        <Popup />
+        <Popup>
+          <PromotionBox />
+          <GameEnds />
+        </Popup>
 
         <Files files={files} />
       </div>

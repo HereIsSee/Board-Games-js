@@ -7,8 +7,8 @@ import './GameEnds.css'
 import { Status } from '../../../constants.js'
 import { setupNewGame } from '../../../reducer/actions/game.js'
 
-const GameEnds = ( {onClosePopup, dispatch}) => {
-    const options = ['q','r','b','n']
+const GameEnds = ( {onClosePopup}) => {
+    // const options = ['q','r','b','n']
     
     const { appState : {status}, dispatch } = useAppContext();
 

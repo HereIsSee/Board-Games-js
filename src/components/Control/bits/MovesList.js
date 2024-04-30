@@ -3,7 +3,8 @@ import './MovesList.css'
 
 const MovesList = () => {
 
-    const {appState : {movesList}} = useAppContext()
+    const {appState} = useAppContext()
+    const movesList = appState ? appState.movesList : [];
     return <div className="moves-list">
         {movesList.map ((move,i) =>
             <div key = {i} data-number={Math.floor((i/2) + 1)}>{move}</div>
