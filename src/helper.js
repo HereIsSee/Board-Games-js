@@ -179,5 +179,5 @@ export const getnewMoveNotation = ({piece,rank,file,x,y,position,promotesTo}) =>
 
 }
 
-}
+
 
