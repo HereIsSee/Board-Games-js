@@ -1,7 +1,7 @@
 import { copyPosition } from "../helper"
 export const moveCheckers = ({position,piece,rank,file,x,y}) => {
     const newPosition = copyPosition(position)
-    if(piece === 'bc' && x === 7)
+    if(piece === 'bc' && x === 0)
     {
         newPosition[rank][file] = ''
         newPosition[x][y]='bx'
