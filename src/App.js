@@ -67,8 +67,12 @@ function App() {
               )
             ) : (
               <>
-                <button className="landing-button" id="play-button" onClick={handlePlayClick}>Play</button>
-                <button className="landing-button" id="settings-button" onClick={handleSettingsClick}>Settings</button>
+                 <div className="columnContainer">
+                 <button className="landing-button" id="play-button" onClick={handlePlayClick}>Play</button>
+                 <button className="landing-button" id="settings-button" onClick={handleSettingsClick}>Settings</button>
+
+                 </div>
+                
               </>
             )}
             {showPlayModal && (
