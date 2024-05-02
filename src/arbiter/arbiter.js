@@ -1,6 +1,6 @@
 import { areSameColorTiles, findPieceCoords } from '../helper';
-import { getKnightMoves, getRookMoves, getBishopMoves, getQueenMoves, getKingMoves, getPawnMoves, getPawnCaptures, getCastlingMoves, getPieces, getKingPosition } from './getMoves'
-import { movePiece,movePawn } from './move';
+import { getCheckersMoves, getCheckersCaptures, getKnightMoves, getRookMoves, getBishopMoves, getQueenMoves, getKingMoves, getPawnMoves, getPawnCaptures, getCastlingMoves, getPieces, getKingPosition } from './getMoves'
+import { movePiece,movePawn, moveCheckers } from './move';
 
 const arbiter = {
 
@@ -16,9 +16,34 @@ const arbiter = {
         if (piece.endsWith('k'))
             return getKingMoves({position,piece,rank,file});
         if (piece.endsWith('p'))
-            return getPawnMoves({position,piece,rank,file})
+            return getPawnMoves({position,piece,rank,file});
+    },
+    getValidCheckersMoves : function ({position,prevPosition,piece,rank,file}) {
+        let moves = getCheckersMoves({position,piece,rank,file})
+        // var pos = getPos({position,piece,rank,file});
+        const notInCheckMoves = []
+        moves = [
+            ...moves,
+            ...getCheckersCaptures({position,prevPosition,piece,rank,file})
+        ]
+        // if (piece.endsWith('p')){
+        //     moves = [
+        //         ...moves,
+        //         ...getPawnCaptures({position,prevPosition,piece,rank,file})
+        //     ]
+        // }
+
+        moves.forEach(([x,y]) => {
+            
+        
+            notInCheckMoves.push([x,y])
+  
+        })
+        return notInCheckMoves
     },
    
+
+ 
     getValidMoves : function ({position,castleDirection,prevPosition,piece,rank,file}) {
         let moves = this.getRegularMoves({position,piece,rank,file})
         const notInCheckMoves = []
@@ -78,6 +103,11 @@ const arbiter = {
             return movePawn({position,piece,rank,file,x,y})
         else 
             return movePiece({position,piece,rank,file,x,y})
+    },
+    performCheckersMove : function ({position,piece,rank,file,x,y}) {
+        
+            return moveCheckers({position,piece,rank,file,x,y})
+        
     },
 
     isStalemate : function (position,player, castleDirection){
