@@ -1,5 +1,7 @@
 import { areSameColorTiles, findPieceCoords } from '../helper';
-import { getCheckersMoves, getCheckersCaptures, getKnightMoves, getRookMoves, getBishopMoves, getQueenMoves, getKingMoves, getPawnMoves, getPawnCaptures, getCastlingMoves, getPieces, getKingPosition } from './getMoves'
+import { getCheckersMoves, getCheckersCaptures, getCheckersPromotedMoves, getCherckersPromotedCaptures, getKnightMoves, getRookMoves, getBishopMoves, 
+    getQueenMoves, getKingMoves, getPawnMoves, getPawnCaptures, getCastlingMoves, getPieces, 
+    getKingPosition } from './getMoves'
 import { movePiece,movePawn, moveCheckers } from './move';
 
 const arbiter = {
@@ -17,21 +19,26 @@ const arbiter = {
             return getKingMoves({position,piece,rank,file});
         if (piece.endsWith('p'))
             return getPawnMoves({position,piece,rank,file});
+        if (piece.endsWith('c'))
+            return getCheckersMoves({position,piece,rank,file});
+        if (piece.endsWith('x'))
+            return getCheckersPromotedMoves({position,piece,rank,file});
     },
     getValidCheckersMoves : function ({position,prevPosition,piece,rank,file}) {
-        let moves = getCheckersMoves({position,piece,rank,file})
+        let moves = this.getRegularMoves({position,piece,rank,file})
         // var pos = getPos({position,piece,rank,file});
         const notInCheckMoves = []
         moves = [
             ...moves,
             ...getCheckersCaptures({position,prevPosition,piece,rank,file})
         ]
-        // if (piece.endsWith('p')){
-        //     moves = [
-        //         ...moves,
-        //         ...getPawnCaptures({position,prevPosition,piece,rank,file})
-        //     ]
-        // }
+        
+        if (piece.endsWith('x')){
+            moves = [
+                ...moves,
+                ...getCherckersPromotedCaptures({position,prevPosition,piece,rank,file})
+            ]
+        }
 
         moves.forEach(([x,y]) => {
             
@@ -42,8 +49,6 @@ const arbiter = {
         return notInCheckMoves
     },
    
-
- 
     getValidMoves : function ({position,castleDirection,prevPosition,piece,rank,file}) {
         let moves = this.getRegularMoves({position,piece,rank,file})
         const notInCheckMoves = []
