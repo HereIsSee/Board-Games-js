@@ -1,18 +1,6 @@
 import { copyPosition } from "../helper"
 export const moveCheckers = ({position,piece,rank,file,x,y}) => {
     const newPosition = copyPosition(position)
-    if(piece === 'bc' && x === 0)
-    {
-        newPosition[rank][file] = ''
-        newPosition[x][y]='bx'
-        return newPosition
-    }
-    if(piece === 'wc' && x === 7)
-    {
-        newPosition[rank][file] = ''
-        newPosition[x][y]='wx'
-        return newPosition
-    }
     //From here
     for (let i = 1; i < 8; i++) {
         if (position?.[x-i]?.[y-i] === undefined)
@@ -57,6 +45,19 @@ export const moveCheckers = ({position,piece,rank,file,x,y}) => {
         {
             newPosition[x+1][y-1]=''
         } 
+    }
+
+    if(piece === 'bc' && x === 0)
+    {
+        newPosition[rank][file] = ''
+        newPosition[x][y]='bx'
+        return newPosition
+    }
+    if(piece === 'wc' && x === 7)
+    {
+        newPosition[rank][file] = ''
+        newPosition[x][y]='wx'
+        return newPosition
     }
     newPosition[rank][file] = ''
     newPosition[x][y] = piece
