@@ -28,11 +28,13 @@ const arbiter = {
         let moves = this.getRegularMoves({position,piece,rank,file})
         // var pos = getPos({position,piece,rank,file});
         const notInCheckMoves = []
-        moves = [
-            ...moves,
-            ...getCheckersCaptures({position,prevPosition,piece,rank,file})
-        ]
         
+        if (piece.endsWith('c')){
+            moves = [
+                ...moves,
+                ...getCheckersCaptures({position,prevPosition,piece,rank,file})
+            ]
+        }
         if (piece.endsWith('x')){
             moves = [
                 ...moves,

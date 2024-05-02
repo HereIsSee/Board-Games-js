@@ -13,26 +13,54 @@ export const moveCheckers = ({position,piece,rank,file,x,y}) => {
         newPosition[x][y]='wx'
         return newPosition
     }
-
-    if(x - rank > 1 && y - file >1)
-       {
+    //From here
+    for (let i = 1; i < 8; i++) {
+        if (position?.[x-i]?.[y-i] === undefined)
+        {
+            break
+        }
+                
+        if(x - rank > i && y - file >i)
+        {
             newPosition[x-1][y-1]=''
-       } 
-       if(x - rank > 1 && file - y >1)
-       {
+        } 
+    }
+    for (let i = 1; i < 8; i++) {
+        if (position?.[x-i]?.[y+i] === undefined)
+        {
+            break
+        }
+                
+        if(x - rank > 1 && file - y >1)
+        {
             newPosition[x-1][y+1]=''
-       } 
-       if(rank - x > 1 && file - y >1)
-       {
+        } 
+    }
+    for (let i = 1; i < 8; i++) {
+        if (position?.[x+i]?.[y+i] === undefined)
+        {
+            break
+        }
+                
+        if(rank - x > 1 && file - y >1)
+        {
             newPosition[x+1][y+1]=''
-       } 
-       if(rank - x > 1 && y - file >1)
-       {
+        } 
+    }
+    for (let i = 1; i < 8; i++) {
+        if (position?.[x+i]?.[y-i] === undefined)
+        {
+            break
+        }
+                
+        if(rank - x > 1 && y - file >1)
+        {
             newPosition[x+1][y-1]=''
-       } 
-       newPosition[rank][file] = ''
-        newPosition[x][y] = piece
-        return newPosition
+        } 
+    }
+    newPosition[rank][file] = ''
+    newPosition[x][y] = piece
+    return newPosition   
 }
 
 export const movePiece = ({position,piece,rank,file,x,y}) => {

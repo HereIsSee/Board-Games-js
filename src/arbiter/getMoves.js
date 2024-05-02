@@ -466,60 +466,46 @@ export const getCheckersPromotedMoves = ({position, piece, rank, file}) => {
 // export const getPos = ({position,piece,rank,file}) => {
     
 // }
-export const getCherckersPromotedCaptures = ({position, prevPosition, piece, rank, file}) => {
+export const getCherckersPromotedCaptures = ({ position, prevPosition, piece, rank, file }) => {
     const moves = []
     const us = piece[0]
     const enemy = us === 'w' ? 'b' : 'w'
 
-   
-        const direction = [
-            [-2,-2, -1, -1],
-            [2,2,1,1],
-            [2,-2,1,-1],
-            [-2,2,-1,1],
-        ]
-        
-        direction.forEach(dir => {
-            for (let i = 1; i < direction.length; i++) {
-                const x = rank + (i*dir[0])
-                const y = file + (i*dir[1])
-                const x1 = rank + (i*dir[2])
-                const y1 = file + (i*dir[3])
-                if (position?.[x]?.[y] === undefined )
-                    break
-                
-                if (position[x][y].startsWith(us))
-                    break
+    const direction = [
+        [-1, -1], // Up-left
+        [1, 1],   // Down-right
+        [1, -1],  // Down-left
+        [-1, 1],  // Up-right
+    ]
 
-                if (position[x][y].startsWith(enemy))
-                    break
-                if(position?.[x1]?.[y1] && position[x1][y1].startsWith(enemy) && !position[x][y].startsWith(enemy) && !position[x][y].startsWith(us))
-                {
-                    moves.push([x,y])
-                    // position[rank+1][file-1]=''
+    direction.forEach(dir => {
+        for (let i = 1; i < 8; i++) {
+            const x = rank + (i * dir[0])
+            const y = file + (i * dir[1])
+
+            // If out of bounds, break
+            if (position?.[x]?.[y] === undefined)
+                break
+
+            // If it's an empty square, consider moving
+            if (position[x][y] === '') {
+                moves.push([x, y])
+            } else if (position[x][y].startsWith(enemy)) {
+                let newX = x + dir[0] // Move one step further in the same direction
+                let newY = y + dir[1]
+
+                // Keep moving in the same direction until we find an empty square
+                while (position?.[newX]?.[newY] !== undefined && position[newX][newY] === '') {
+                    moves.push([newX, newY])
+                    newX += dir[0]
+                    newY += dir[1]
                 }
-                // if(position?.[rank+1]?.[file+1] && position[rank+1][file+1].startsWith(enemy) && !position[rank+2][file+2].startsWith(enemy) && !position[rank+2][file+2].startsWith(us))
-                // {
-                //     moves.push([rank+2,file+2])
-                //     // position[rank+1][file+1]=''
-                // }
-                // if(position?.[rank-1]?.[file-1] && position[rank-1][file-1].startsWith(enemy) && !position[rank-2][file-2].startsWith(enemy) && !position[rank-2][file-2].startsWith(us))
-                // {
-                //     moves.push([rank-2,file-2])
-                //     // position[rank-1][file-1]=''
-                // }
-                // if(position?.[rank-1]?.[file+1] && position[rank-1][file+1].startsWith(enemy) && !position[rank-2][file+2].startsWith(enemy) && !position[rank-2][file+2].startsWith(us))
-                // {
-                //     moves.push([rank-2,file+2])
-                //     // position[rank-1][file+1]=''
-                // }
-                
-    
-                // moves.push([x,y])
+                break // Break out of the loop for this direction
+            } else {
+                break; // If it's our own piece, stop searching in this direction
             }
-        })
-    
-    
-    
+        }
+    })
+
     return moves
 }
