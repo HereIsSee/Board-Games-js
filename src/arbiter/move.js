@@ -1,4 +1,87 @@
 import { copyPosition } from "../helper"
+export const moveCheckers = ({position,piece,rank,file,x,y}) => {
+    const newPosition = copyPosition(position)
+    
+    let number =0
+    if(number === 0){
+        for (let i = 1; i < 8; i++) {
+            if (position?.[x-i]?.[y-i] === undefined)
+            {
+                break
+            }
+                    
+            if(x - rank > i && y - file >i)
+            {
+                newPosition[x-i][y-i]=''
+                number=1
+                
+            } 
+        }
+    }
+    if(number === 0){
+        for (let i = 1; i < 8; i++) {
+            if (position?.[x-i]?.[y+i] === undefined)
+            {
+                break
+            }
+                    
+            if(x - rank > i && file - y >i)
+            {
+                newPosition[x-i][y+i]=''
+                number=1
+                
+            } 
+        }
+    }
+    if(number === 0){
+        for (let i = 1; i < 8; i++) {
+            if (position?.[x+i]?.[y+i] === undefined)
+            {
+                break
+            }
+                    
+            if(rank - x > i && file - y >i)
+            {
+                newPosition[x+i][y+i]=''
+                number=1
+                
+            } 
+        }
+    }
+    if(number === 0){
+        for (let i = 1; i < 8; i++) {
+            if (position?.[x+i]?.[y-i] === undefined)
+            {
+                break
+            }
+                    
+            if(rank - x > i && y - file >i)
+            {
+                newPosition[x+i][y-i]=''
+                number=1
+                
+            } 
+        }
+    }
+    
+    
+    if(piece === 'bc' && x === 0)
+    {
+        newPosition[rank][file] = ''
+        newPosition[x][y]='bx'
+        return newPosition
+    }
+    if(piece === 'wc' && x === 7)
+    {
+        newPosition[rank][file] = ''
+        newPosition[x][y]='wx'
+        return newPosition
+    }
+    newPosition[rank][file] = ''
+    newPosition[x][y] = piece
+    return newPosition   
+}
+
 export const movePiece = ({position,piece,rank,file,x,y}) => {
 
     const newPosition = copyPosition(position)

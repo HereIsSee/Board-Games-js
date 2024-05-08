@@ -4,11 +4,11 @@ import '../../styles/button.css';
 import '../../styles/dark.css';
 import Ranks from './bits/Ranks';
 import Files from './bits/Files';
-import Pieces from '../Pieces/Pieces';
+import PiecesCheckers from '../Pieces/PiecesCheckers';
 import { useAppContext } from '../../contexts/Context';
 import Popup from '../Popup/Popup';
-import PromotionBox from '../Popup/PromotionBox/PromotionBox';
-import GameEnds from '../Popup/GameEnds/GameEnds';
+import PromotionBox from '../Popup/PromotionBox/PromotionBox'
+import GameEnds from '../Popup/GameEnds/GameEnds'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 
@@ -21,20 +21,6 @@ const Board = ({ onGoBack, onSettingsClick }) => {
   const { appState } = useAppContext();
   const position = appState.position[appState.position.length - 1];
 
-
-  const checkTile = (() => {
-    const isInCheck =  (arbiter.isPlayerInCheck({
-        positionAfterMove : position,
-        player : appState.turn
-    }))
-
-    if (isInCheck)
-        return getKingPosition (position, appState.turn)
-
-    return null
-  })()
-
-
   const getClassName = (i, j) => {
     let c = 'tile';
     c += (i + j) % 2 === 0 ? ' tile--dark ' : ' tile--light ';
@@ -43,11 +29,6 @@ const Board = ({ onGoBack, onSettingsClick }) => {
       if (position[i][j]) c += ' attacking';
       else c += ' highlight';
     }
-
-    if (checkTile && checkTile[0] === i && checkTile[1] === j) {
-      c+= 'checked'
-    }
-
     return c;
   };
 
@@ -58,9 +39,6 @@ const Board = ({ onGoBack, onSettingsClick }) => {
       <button id ="play-button" onClick={onGoBack}>Go Back</button>
       <button id ="settings-button" onClick={onSettingsClick}>Settings</button>
       </div>
-
-      
-      
       
 
       <div className="board">
@@ -74,19 +52,12 @@ const Board = ({ onGoBack, onSettingsClick }) => {
           )}
         </div>
 
-        <Pieces />
-
-        <Popup />
-        <PromotionBox />
-            <GameEnds />
-
-
-        <Popup />
+        <PiecesCheckers />
 
         <Files files={files} />
       </div>
     </div>
   );
-}
+};
 
 export default Board;

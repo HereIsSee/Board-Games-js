@@ -20,7 +20,7 @@ export const clearCandidates = () => {
     };
 };
 
-export const initializeGame = (gameState) => { // Add this function for initializing the game
+export const initializeGame = (gameState) => {
     return {
         type: actionTypes.INITIALIZE_GAME,
         payload: gameState,

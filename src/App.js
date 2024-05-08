@@ -6,6 +6,7 @@ import AppContext from './contexts/Context';
 import { reducer } from './reducer/reducer';
 import { initializeGame } from './constants';
 import Board from './components/Board/Board';
+import BoardCheckers from './components/Board/BoardCheckers'
 import TakeBack from './components/Control/bits/TakeBack';
 import MovesList from './components/Control/bits/MovesList';
 import Control from './components/Control/Control';
@@ -56,15 +57,22 @@ function App() {
   return (
     <AppContext.Provider value={{ appState, dispatch }}>
       <div className="App">
-      <div className="content-container">
-        
+        <div className="content-container">
           <div className="main-content">
             {isPlaying ? (
-              <Board onGoBack={handleGoBack} onSettingsClick={handleSettingsClick} />
+              selectedGame === 'Checkers' ? (
+                <BoardCheckers onGoBack={handleGoBack} onSettingsClick={handleSettingsClick} />
+              ) : (
+                <Board onGoBack={handleGoBack} onSettingsClick={handleSettingsClick} />
+              )
             ) : (
               <>
-                <button className="landing-button" id="play-button" onClick={handlePlayClick}>Play</button>
-                <button className="landing-button" id="settings-button" onClick={handleSettingsClick}>Settings</button>
+                 <div className="columnContainer">
+                 <button className="landing-button" id="play-button" onClick={handlePlayClick}>Play</button>
+                 <button className="landing-button" id="settings-button" onClick={handleSettingsClick}>Settings</button>
+
+                 </div>
+                
               </>
             )}
             {showPlayModal && (
@@ -89,17 +97,18 @@ function App() {
             )}
           </div>
           <div className="right-side">
-          <Control>
-            <div className="moves-control">
-              {movesListVisible && <MovesList />}
-              {takeBackVisible && <TakeBack />}
-            </div>
-          </Control>
-        </div>
+            <Control>
+              <div className="moves-control">
+                {movesListVisible && <MovesList />}
+                {takeBackVisible && <TakeBack />}
+              </div>
+            </Control>
+          </div>
         </div>
       </div>
     </AppContext.Provider>
   );
+  
 }
 
 export default App;

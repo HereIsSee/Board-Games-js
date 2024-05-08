@@ -28,6 +28,8 @@
 
 .piece.wc {background-image: url(../../assets/wc.png);}
 .piece.bc {background-image: url(../../assets/bc.png);}
+.piece.wx {background-image: url(../../assets/wx.png);}
+.piece.bx {background-image: url(../../assets/bx.png);}
 
 .piece.p-07 {transform: translate(0%,0%);}
 .piece.p-17 {transform: translate(100%,0%);}
