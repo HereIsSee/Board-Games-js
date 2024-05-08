@@ -5,6 +5,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^13.5.0",
+    "lint": "eslint ./",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.22.3",
@@ -23,6 +24,11 @@
       "react-app/jest"
     ]
   },
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascipt",
+    "html"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -37,7 +43,16 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@eslint/js": "^9.1.1",
     "@testing-library/react": "^14.2.2",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "globals": "^15.1.0",
     "jest": "^27.5.1"
-  }
+  },
+  "description": "Group project in KTU. Our group is creating a website where you can play board games like checkers and chess. Made with JavaScript instead of C#,",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
