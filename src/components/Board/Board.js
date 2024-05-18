@@ -55,7 +55,7 @@ const Board = ({ onGoBack, onSettingsClick }) => {
     <div>
       <div class="container">
 
-      <button id ="play-button" onClick={onGoBack}>Go Back</button>
+      <button className="go-back" id ="play-button" onClick={onGoBack}>Go Back</button>
       <button id ="settings-button" onClick={onSettingsClick}>Settings</button>
       </div>
 
