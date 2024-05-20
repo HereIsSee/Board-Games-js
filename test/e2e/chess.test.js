@@ -105,6 +105,56 @@ describe('Chess game', () => {
     expect(className2).toContain('wr');
     
   }, 10000);
+
+  
+  test('Choose change exit game scenario', async () => {
+    await page.waitForSelector('#play-button.go-back', { timeout: 10000 });
+    await page.click('#play-button.go-back');
+    await delay(5000);
+
+    await page.waitForSelector('#play-button.landing-button', { timeout: 10000 });
+    await page.click('#play-button.landing-button');
+    await delay(5000);
+
+    await page.waitForSelector('#Chess.game-option', { timeout: 10000 });
+    await page.click('#Chess.game-option');
+    await delay(5000);
+
+    await page.waitForSelector('#play-button.go-back', { timeout: 10000 });
+    await page.click('#play-button.go-back');
+    await delay(5000);
+
+    await page.waitForSelector('#play-button.landing-button', { timeout: 10000 });
+    await page.click('#play-button.landing-button');
+    await delay(5000);
+
+    await page.waitForSelector('#Checkers.game-option', { timeout: 30000 });
+    await page.click('#Checkers.game-option');
+    await delay(5000);
+
+    await page.waitForSelector('#play-button.go-back', { timeout: 10000 });
+    await page.click('#play-button.go-back');
+    await delay(5000);
+
+    await page.waitForSelector('#play-button.landing-button', { timeout: 10000 });
+    await page.click('#play-button.landing-button');
+    await delay(5000);
+
+    await page.waitForSelector('#Random.game-option', { timeout: 10000 });
+    await page.click('#Random.game-option');
+    await delay(5000);
+
+    await page.waitForSelector('#play-button.go-back', { timeout: 10000 });
+    await page.click('#play-button.go-back');
+    await delay(5000);
+    
+    await page.waitForSelector('#play-button.landing-button', { timeout: 10000 });
+    await page.click('#play-button.landing-button');
+    await delay(5000);
+
+    const startingGame = '.App'; 
+    expect(startingGame).not.toBeNull();
+  }, 1000000);
 });
 
   

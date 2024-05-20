@@ -81,8 +81,8 @@ function App() {
                   <span className="close" onClick={handleClosePlayModal}>&times;</span>
                   <h2>Choose a Game</h2>
                   <button className="game-option" id="Chess" onClick={() => handleGameSelect('Chess')}>Chess</button>
-                  <button className="game-option" onClick={() => handleGameSelect('Checkers')}>Checkers</button>
-                  <button className="game-option" onClick={() => handleGameSelect('Random')}>Random</button>
+                  <button className="game-option" id="Checkers" onClick={() => handleGameSelect('Checkers')}>Checkers</button>
+                  <button className="game-option" id="Random" onClick={() => handleGameSelect('Random')}>Random</button>
                 </div>
               </div>
             )}
